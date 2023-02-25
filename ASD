@@ -1,0 +1,35 @@
+EnablePrimaryMouseButtonEvents(true);
+onClickXLocation = 0;
+onClickYlocation = 0;
+charLocX = 19444;
+charLocY = 24010;
+boxX = 41289;
+boxY = 49728;
+function OnEvent(event, arg)
+    coordinateX, coordinateY = GetMousePosition();
+    OutputLogMessage("Event: " .. event .. " Arg: " .. arg .. " x: " .. coordinateX .. " y: " .. coordinateY .. "\n");
+    onClickXLocation = coordinateX;
+    onClickYLocation = coordinateY;
+    if event == "MOUSE_BUTTON_PRESSED" and arg == 7 then
+        putBox(17109,25084)
+    end;
+end;
+
+isPuttingBox = false
+
+function putBox(locX,locY)
+  if (isPuttingBox == false) then
+    isPuttingBox = true;
+      MoveMouseTo(boxX, boxY);
+      Sleep(1);
+      PressMouseButton(1);
+      Sleep(5);
+      MoveMouseTo(locX,locY);
+      Sleep(1);
+      ReleaseMouseButton(1);
+      Sleep(1);
+      MoveMouseTo(onClickXLocation, onClickYLocation);
+    isPuttingBox = false;
+    Sleep(300)
+  end
+end;
